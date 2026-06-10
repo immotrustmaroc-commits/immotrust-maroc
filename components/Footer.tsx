@@ -1,18 +1,29 @@
+'use client'
+
 import Link from 'next/link'
+import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 
 export default function Footer() {
+  const pathname = usePathname()
+
+  // L'espace démo (/demo/*) a son propre chrome — on masque le footer public.
+  if (pathname?.startsWith('/demo')) return null
+
   return (
     <footer className="bg-primary-900 text-white mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
-            <div className="flex items-center gap-2 font-bold text-xl mb-3">
-              <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true">
-                <path d="M16 2L4 8v8c0 7.18 5.16 13.9 12 15.93C22.84 29.9 28 23.18 28 16V8L16 2z" fill="#6bc99a" />
-                <path d="M16 6L7 11v7c0 5.39 3.87 10.42 9 11.95 5.13-1.53 9-6.56 9-11.95v-7L16 6z" fill="#155e38" />
-                <path d="M13 16l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span>ImmoTrust <span className="text-primary-300">Maroc</span></span>
+            <div className="mb-3">
+              <Image
+                src="/logo-ImmoTrust-Maroc-for-dark-background.png"
+                alt="ImmoTrust Maroc"
+                width={160}
+                height={48}
+                className="h-12 w-auto"
+                style={{ width: 'auto' }}
+              />
             </div>
             <p className="text-white/70 text-sm leading-relaxed max-w-sm">
               La première plateforme marocaine de vérification indépendante des projets immobiliers. Investissez en toute confiance grâce à nos analyses approfondies et scores de confiance certifiés.

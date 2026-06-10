@@ -17,6 +17,9 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
 
+  // L'espace démo (/demo/*) a son propre chrome — on masque la nav publique.
+  if (pathname?.startsWith('/demo')) return null
+
   return (
     <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -24,7 +27,7 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="shrink-0">
-            <Image src="/logo.png" alt="ImmoTrust Maroc" width={140} height={40} className="h-10 w-auto" priority />
+            <Image src="/logo-ImmoTrust-Maroc.png" alt="ImmoTrust Maroc" width={133} height={40} className="h-10 w-auto" style={{ width: 'auto' }} priority />
           </Link>
 
           {/* Desktop links */}
