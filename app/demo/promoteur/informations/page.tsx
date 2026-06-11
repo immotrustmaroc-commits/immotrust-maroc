@@ -1,27 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
-import { demoPromoter } from '@/lib/demo/demoData'
-
-type Form = {
-  name: string
-  ice: string
-  city: string
-  address: string
-  phone: string
-  email: string
-  description: string
-}
-
-const initial: Form = {
-  name: demoPromoter.name,
-  ice: demoPromoter.ice,
-  city: demoPromoter.city,
-  address: demoPromoter.address,
-  phone: demoPromoter.phone,
-  email: demoPromoter.email,
-  description: demoPromoter.description,
-}
+import { useDemoStore, submitInfoUpdate, type PromoterInfo } from '@/lib/demo/demoStore'
 
 function Field({
   label,
@@ -51,16 +32,21 @@ function Field({
 }
 
 export default function InformationsPage() {
-  const [form, setForm] = useState<Form>(initial)
+  const { published, pending } = useDemoStore()
+  // On part des informations actuellement publiées.
+  const [form, setForm] = useState<PromoterInfo>(() => published.info)
   const [submitted, setSubmitted] = useState(false)
 
-  function set<K extends keyof Form>(key: K, value: string) {
+  const pendingInfo = pending.filter((s) => s.type === 'INFO_UPDATE').length
+
+  function set<K extends keyof PromoterInfo>(key: K, value: string) {
     setForm((p) => ({ ...p, [key]: value }))
     setSubmitted(false)
   }
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    submitInfoUpdate(form)
     setSubmitted(true)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -75,18 +61,20 @@ export default function InformationsPage() {
         </p>
       </header>
 
-      {submitted && (
-        <div className="mb-5 rounded-xl border border-primary-200 bg-primary-50 px-4 py-3 flex items-start gap-3">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#155e38" strokeWidth="2.5" className="shrink-0 mt-0.5">
-            <path d="M20 6L9 17l-5-5" />
+      {(submitted || pendingInfo > 0) && (
+        <div className="mb-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 flex items-start gap-3">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e87722" strokeWidth="2.5" className="shrink-0 mt-0.5">
+            <circle cx="12" cy="12" r="10" /><path d="M12 8v4M12 16h.01" />
           </svg>
-          <div>
-            <p className="text-sm font-semibold text-primary-800">Modifications soumises</p>
-            <p className="text-sm text-primary-700/80">
-              Vos informations sont en attente de validation par ImmoTrust. Elles seront publiées
-              après vérification.
+          <div className="flex-1">
+            <p className="text-sm font-semibold text-amber-800">Modifications en attente de validation</p>
+            <p className="text-sm text-amber-700/90">
+              Vos informations seront publiées sur le front après vérification par ImmoTrust.
             </p>
           </div>
+          <Link href="/demo/promoteur/validation" className="shrink-0 text-sm font-semibold text-[#cc2200] hover:underline">
+            File →
+          </Link>
         </div>
       )}
 
@@ -117,7 +105,7 @@ export default function InformationsPage() {
         <div className="flex flex-col sm:flex-row gap-3 sm:justify-end pt-1">
           <button
             type="button"
-            onClick={() => { setForm(initial); setSubmitted(false) }}
+            onClick={() => { setForm(published.info); setSubmitted(false) }}
             className="order-2 sm:order-1 px-5 py-2.5 rounded-lg border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
           >
             Réinitialiser

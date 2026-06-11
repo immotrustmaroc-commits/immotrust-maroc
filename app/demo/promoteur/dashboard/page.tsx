@@ -9,6 +9,7 @@ import {
   demoProjects,
   type DemoAlert,
 } from '@/lib/demo/demoData'
+import { useDemoStore, FLAGSHIP_PROJECT } from '@/lib/demo/demoStore'
 
 const alertStyles: Record<DemoAlert['level'], { dot: string; badge: string; label: string }> = {
   info: { dot: '#1f8f58', badge: 'bg-primary-50 text-primary-700', label: 'Info' },
@@ -17,7 +18,12 @@ const alertStyles: Record<DemoAlert['level'], { dot: string; badge: string; labe
 }
 
 export default function DashboardPage() {
+  const { published } = useDemoStore()
   const maxDaily = Math.max(...demoVisitStats.daily7)
+
+  // L'avancement du projet phare reflète la valeur publiée (live).
+  const projectProgress = (p: { title: string; progress: number }) =>
+    p.title === FLAGSHIP_PROJECT ? published.progress : p.progress
 
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-6xl mx-auto">
@@ -158,12 +164,12 @@ export default function DashboardPage() {
               <div className="mt-3">
                 <div className="flex justify-between text-xs text-gray-500 mb-1">
                   <span>Avancement</span>
-                  <span className="font-semibold">{p.progress}%</span>
+                  <span className="font-semibold">{projectProgress(p)}%</span>
                 </div>
                 <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
                   <div
-                    className="h-full rounded-full"
-                    style={{ width: `${p.progress}%`, backgroundColor: p.status === 'Retard' ? '#e87722' : '#155e38' }}
+                    className="h-full rounded-full transition-all duration-500"
+                    style={{ width: `${projectProgress(p)}%`, backgroundColor: p.status === 'Retard' ? '#e87722' : '#155e38' }}
                   />
                 </div>
               </div>

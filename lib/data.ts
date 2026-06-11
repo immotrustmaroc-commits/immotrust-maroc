@@ -73,6 +73,16 @@ export type Projet = {
 
 export const promoteurs: Promoteur[] = [
   {
+    id: 'residences-zineb',
+    nom: 'Résidences Zineb',
+    scoreConfiance: 78,
+    projetsActifs: 3,
+    anneeCreation: 2015,
+    ville: 'Casablanca',
+    description: 'Promoteur casablancais de moyen et haut standing, au suivi de chantier transparent.',
+    couleur: '#155e38',
+  },
+  {
     id: 'al-omrane',
     nom: 'Groupe Al Omrane',
     scoreConfiance: 94,
@@ -115,6 +125,50 @@ export const promoteurs: Promoteur[] = [
 ]
 
 export const projets: Projet[] = [
+  {
+    id: 'residences-zineb',
+    titre: 'Les Jardins de Zineb',
+    promoteurId: 'residences-zineb',
+    promoteurNom: 'Résidences Zineb',
+    ville: 'Casablanca',
+    quartier: 'Bouskoura',
+    type: 'Appartement',
+    avancement: 62,
+    prixMin: 720000,
+    prixMax: 1450000,
+    livraison: 'Décembre 2026',
+    couleur: '#1f8f58',
+    couleur2: '#0e3d25',
+    surface: '68 - 135 m²',
+    description: 'Résidence contemporaine à Bouskoura : appartements lumineux, espaces verts et suivi de chantier publié en continu sur ImmoTrust.',
+    totalUnites: 156,
+    unitesVendues: 98,
+    timeline: [
+      { date: 'Janvier 2025', titre: 'Permis de construire obtenu', description: 'Permis délivré par la commune de Bouskoura après instruction complète du dossier.', statut: 'completed' },
+      { date: 'Mai 2025', titre: 'Fondations achevées', description: 'Fondations profondes réceptionnées par le bureau de contrôle.', statut: 'completed' },
+      { date: 'Juin 2026', titre: 'Gros œuvre en cours', description: 'Élévation des structures porteuses, actuellement au 6ᵉ niveau.', statut: 'current' },
+      { date: 'Décembre 2026', titre: 'Livraison prévue', description: 'Remise des clés et des titres de propriété aux acquéreurs.', statut: 'upcoming' },
+    ],
+    photos: [
+      { titre: 'Perspective architecturale', date: 'Mai 2026', verifie: true, couleur: '#1f8f58' },
+      { titre: 'Avancement gros œuvre', date: 'Juin 2026', verifie: true, couleur: '#155e38' },
+    ],
+    documents: [
+      { nom: 'Permis de construire', type: 'PDF', taille: '2.2 MB', date: 'Janvier 2025', verifie: true },
+      { nom: 'Plan de masse approuvé', type: 'PDF', taille: '3.6 MB', date: 'Décembre 2024', verifie: true },
+      { nom: 'Garantie Financière d\'Achèvement', type: 'PDF', taille: '1.1 MB', date: 'En cours', verifie: false },
+    ],
+    risques: [
+      { categorie: 'Risque financier', niveau: 'faible', description: '63% des unités vendues. Financement sécurisé par fonds propres et versements acquéreurs.', icone: '💰' },
+      { categorie: 'Risque juridique', niveau: 'faible', description: 'Titre foncier propre, permis en règle, aucun litige enregistré.', icone: '⚖️' },
+      { categorie: 'Risque de livraison', niveau: 'moyen', description: 'Léger retard possible selon l\'avancement du gros œuvre. Suivi rapproché par nos équipes.', icone: '⏰' },
+    ],
+    recommandation: {
+      niveau: 'Bon',
+      score: 78,
+      texte: 'Résidence sérieuse portée par un promoteur transparent. Documents en règle (GFA en cours de vérification), avancement conforme et bon rythme de commercialisation. Investissement recommandé avec une vigilance normale sur les délais.',
+    },
+  },
   {
     id: 'al-yasmine-casablanca',
     titre: 'Résidence Al Yasmine',
