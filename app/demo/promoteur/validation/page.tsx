@@ -5,6 +5,7 @@ import {
   useDemoStore,
   approveSubmission,
   rejectSubmission,
+  resetDemo,
   type Submission,
 } from '@/lib/demo/demoStore'
 
@@ -73,19 +74,37 @@ function SubmissionCard({ sub }: { sub: Submission }) {
 export default function ValidationPage() {
   const { pending } = useDemoStore()
 
+  function handleReset() {
+    if (window.confirm('Réinitialiser la démo ? Toutes les modifications publiées et en attente seront effacées et la fiche publique reviendra à son état initial.')) {
+      resetDemo()
+    }
+  }
+
   return (
     <div className="px-4 sm:px-6 lg:px-8 py-6 max-w-4xl mx-auto">
-      <header className="mb-6">
-        <div className="inline-flex items-center gap-2 mb-1">
-          <span className="text-[11px] font-bold uppercase tracking-wider text-[#cc2200] bg-red-50 px-2 py-0.5 rounded">
-            Admin ImmoTrust · Démo
-          </span>
+      <header className="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <div className="inline-flex items-center gap-2 mb-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#cc2200] bg-red-50 px-2 py-0.5 rounded">
+              Admin ImmoTrust · Démo
+            </span>
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900">File de validation</h1>
+          <p className="text-sm text-gray-500 mt-0.5">
+            Rien n’est publié sur le site public sans vérification d’ImmoTrust. Validez une soumission
+            pour la rendre visible <strong>en direct</strong> sur la fiche publique.
+          </p>
         </div>
-        <h1 className="text-2xl font-bold text-gray-900">File de validation</h1>
-        <p className="text-sm text-gray-500 mt-0.5">
-          Rien n’est publié sur le site public sans vérification d’ImmoTrust. Validez une soumission
-          pour la rendre visible <strong>en direct</strong> sur la fiche publique.
-        </p>
+        <button
+          onClick={handleReset}
+          className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold text-gray-500 hover:text-[#cc2200] border border-gray-200 hover:border-[#cc2200]/40 px-3 py-2 rounded-lg transition-colors"
+          title="Repartir d’un état propre entre deux présentations"
+        >
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <path d="M3 12a9 9 0 109-9 9 9 0 00-6.36 2.64L3 8" /><path d="M3 3v5h5" />
+          </svg>
+          Réinitialiser la démo
+        </button>
       </header>
 
       {pending.length === 0 ? (
