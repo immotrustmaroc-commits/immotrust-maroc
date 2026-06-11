@@ -18,10 +18,10 @@ function SubmissionCard({ sub }: { sub: Submission }) {
   return (
     <li className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
       <div className="flex items-center justify-between px-4 py-2.5 bg-amber-50 border-b border-amber-100">
-        <span className="text-xs font-semibold uppercase tracking-wider text-[#e87722]">
+        <span className="text-xs font-semibold uppercase tracking-wider text-[#b8560f]">
           {sub.type === 'INFO_UPDATE' ? 'Mise à jour — Informations société' : 'Mise à jour — Chantier'}
         </span>
-        <span className="text-[11px] text-gray-400">
+        <span className="text-[11px] text-gray-500">
           Soumis {new Date(sub.createdAt).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
         </span>
       </div>
@@ -29,12 +29,12 @@ function SubmissionCard({ sub }: { sub: Submission }) {
       <div className="px-4 py-3.5">
         {sub.type === 'INFO_UPDATE' ? (
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-1.5 text-sm">
-            <div><dt className="text-gray-400 text-xs">Raison sociale</dt><dd className="text-gray-800">{sub.info.name}</dd></div>
-            <div><dt className="text-gray-400 text-xs">Ville</dt><dd className="text-gray-800">{sub.info.city}</dd></div>
-            <div><dt className="text-gray-400 text-xs">ICE</dt><dd className="text-gray-800 font-mono">{sub.info.ice}</dd></div>
-            <div><dt className="text-gray-400 text-xs">Téléphone</dt><dd className="text-gray-800">{sub.info.phone}</dd></div>
-            <div className="sm:col-span-2"><dt className="text-gray-400 text-xs">Adresse</dt><dd className="text-gray-800">{sub.info.address}</dd></div>
-            <div className="sm:col-span-2"><dt className="text-gray-400 text-xs">Description</dt><dd className="text-gray-700 leading-relaxed">{sub.info.description}</dd></div>
+            <div><dt className="text-gray-500 text-xs">Raison sociale</dt><dd className="text-gray-800">{sub.info.name}</dd></div>
+            <div><dt className="text-gray-500 text-xs">Ville</dt><dd className="text-gray-800">{sub.info.city}</dd></div>
+            <div><dt className="text-gray-500 text-xs">ICE</dt><dd className="text-gray-800 font-mono">{sub.info.ice}</dd></div>
+            <div><dt className="text-gray-500 text-xs">Téléphone</dt><dd className="text-gray-800">{sub.info.phone}</dd></div>
+            <div className="sm:col-span-2"><dt className="text-gray-500 text-xs">Adresse</dt><dd className="text-gray-800">{sub.info.address}</dd></div>
+            <div className="sm:col-span-2"><dt className="text-gray-500 text-xs">Description</dt><dd className="text-gray-700 leading-relaxed">{sub.info.description}</dd></div>
           </dl>
         ) : (
           <div className="text-sm">
@@ -46,7 +46,7 @@ function SubmissionCard({ sub }: { sub: Submission }) {
                 </span>
               )}
             </div>
-            <p className="text-xs text-gray-400 mt-0.5">{sub.entry.project} · {formatDate(sub.entry.date)}</p>
+            <p className="text-xs text-gray-500 mt-0.5">{sub.entry.project} · {formatDate(sub.entry.date)}</p>
             <p className="text-gray-600 mt-2 leading-relaxed">{sub.entry.description}</p>
           </div>
         )}
@@ -113,7 +113,7 @@ export default function ValidationPage() {
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#155e38" strokeWidth="2"><path d="M20 6L9 17l-5-5" /></svg>
           </div>
           <p className="text-gray-600 font-medium">Aucune soumission en attente</p>
-          <p className="text-sm text-gray-400 mt-1">
+          <p className="text-sm text-gray-500 mt-1">
             Les mises à jour soumises depuis l’espace promoteur apparaîtront ici pour validation.
           </p>
           <div className="mt-4 flex items-center justify-center gap-3 text-sm">

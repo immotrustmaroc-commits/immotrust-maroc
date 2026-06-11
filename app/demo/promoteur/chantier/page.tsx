@@ -21,7 +21,7 @@ export default function ChantierPage() {
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10))
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [setProgress, setSetProgress] = useState(false)
+  const [shouldUpdateProgress, setShouldUpdateProgress] = useState(false)
   const [progress, setProgressValue] = useState(published.progress)
   const [toast, setToast] = useState(false)
 
@@ -29,9 +29,13 @@ export default function ChantierPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
+    const cleanTitle = title.trim()
+    const cleanDescription = description.trim()
+    // Garde anti-saisie vide (le required HTML laisse passer les espaces seuls).
+    if (!cleanTitle || !cleanDescription) return
     submitConstructionUpdate(
-      { date, title: title.trim(), description: description.trim(), project },
-      setProgress ? progress : null,
+      { date, title: cleanTitle, description: cleanDescription, project },
+      shouldUpdateProgress ? progress : null,
     )
     setTitle('')
     setDescription('')
@@ -104,11 +108,11 @@ export default function ChantierPage() {
               {/* Avancement % (optionnel) */}
               <div className="rounded-lg border border-gray-200 p-3">
                 <label className="flex items-center gap-2 cursor-pointer select-none">
-                  <input type="checkbox" checked={setProgress} onChange={(e) => setSetProgress(e.target.checked)}
+                  <input type="checkbox" checked={shouldUpdateProgress} onChange={(e) => setShouldUpdateProgress(e.target.checked)}
                     className="w-4 h-4 accent-primary-600" />
                   <span className="text-sm font-medium text-gray-700">Mettre à jour l’avancement du projet</span>
                 </label>
-                {setProgress && (
+                {shouldUpdateProgress && (
                   <div className="mt-3">
                     <div className="flex justify-between text-sm text-gray-600 mb-1">
                       <span>Avancement</span>
@@ -125,7 +129,7 @@ export default function ChantierPage() {
                 className="w-full bg-primary-700 hover:bg-primary-600 text-white font-semibold py-2.5 rounded-lg transition-colors">
                 Soumettre la mise à jour
               </button>
-              <p className="text-[11px] text-gray-400 text-center">
+              <p className="text-[11px] text-gray-500 text-center">
                 La mise à jour part en validation ImmoTrust avant publication sur le front.
               </p>
             </form>
@@ -150,7 +154,7 @@ export default function ChantierPage() {
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0">
                       <h3 className="font-semibold text-gray-800 text-sm">{u.title}</h3>
-                      <p className="text-xs text-gray-400 mt-0.5">{u.project} · {formatDate(u.date)}</p>
+                      <p className="text-xs text-gray-500 mt-0.5">{u.project} · {formatDate(u.date)}</p>
                     </div>
                     <span className="shrink-0 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-primary-50 text-primary-700">Publié</span>
                   </div>

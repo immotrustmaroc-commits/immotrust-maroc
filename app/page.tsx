@@ -4,17 +4,18 @@ import SearchBar from '@/components/SearchBar'
 import { promoteurs, projets } from '@/lib/data'
 
 /* ── helpers ──────────────────────────────────────────────── */
+// Barème unique aligné sur le brief (≥75 Excellent / ≥50 Fiable / Vigilance),
+// avec des couleurs conformes WCAG AA (amber-700 / red-700, pas l'orange clair).
 function scoreLabel(s: number) {
-  if (s >= 90) return 'Excellent'
-  if (s >= 80) return 'Très fiable'
-  if (s >= 70) return 'Fiable'
-  return 'À surveiller'
+  if (s >= 75) return 'Excellent'
+  if (s >= 50) return 'Fiable'
+  return 'Vigilance'
 }
 
 function scoreColor(s: number) {
-  if (s >= 80) return { text: 'text-primary-700', bg: 'bg-primary-50', border: 'border-primary-200' }
-  if (s >= 70) return { text: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200' }
-  return { text: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200' }
+  if (s >= 75) return { text: 'text-primary-700', bg: 'bg-primary-50', border: 'border-primary-200' }
+  if (s >= 50) return { text: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200' }
+  return { text: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200' }
 }
 
 function formatPrice(prix: number) {
@@ -179,18 +180,18 @@ export default function HomePage() {
                     <span className={`text-2xl font-bold leading-none ${sc.text}`}>{p.scoreConfiance}</span>
                     <div>
                       <div className={`text-xs font-semibold ${sc.text}`}>/100 · {scoreLabel(p.scoreConfiance)}</div>
-                      <div className="text-xs text-gray-400">Score de confiance</div>
+                      <div className="text-xs text-gray-500">Score de confiance</div>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2 text-xs text-center border-t border-gray-100 pt-3">
                     <div>
                       <div className="font-bold text-gray-900 text-base">{Math.floor(p.projetsActifs * 0.6)}</div>
-                      <div className="text-gray-400">Projets livrés</div>
+                      <div className="text-gray-500">Projets livrés</div>
                     </div>
                     <div>
                       <div className="font-bold text-gray-900 text-base">{Math.ceil(p.projetsActifs * 0.4)}</div>
-                      <div className="text-gray-400">En cours</div>
+                      <div className="text-gray-500">En cours</div>
                     </div>
                     <div>
                       <div className="font-bold text-primary-600 text-base flex items-center justify-center gap-0.5">
@@ -199,7 +200,7 @@ export default function HomePage() {
                         </svg>
                         {(3.5 + p.scoreConfiance / 100).toFixed(1)}
                       </div>
-                      <div className="text-gray-400">Avis clients</div>
+                      <div className="text-gray-500">Avis clients</div>
                     </div>
                   </div>
 
@@ -264,7 +265,7 @@ export default function HomePage() {
 
                   <div className="p-3 flex flex-col flex-1">
                     <p className="font-bold text-gray-900 text-sm mb-0.5">{p.titre}</p>
-                    <p className="text-xs text-gray-400 mb-3">{p.quartier}, {p.ville}</p>
+                    <p className="text-xs text-gray-500 mb-3">{p.quartier}, {p.ville}</p>
                     <ProgressBar value={p.avancement} />
                     <div className="flex justify-between text-xs text-gray-500 mt-3 mb-3">
                       <div>
@@ -296,7 +297,7 @@ export default function HomePage() {
                   </svg>
                   <h3 className="font-bold text-gray-900 text-sm">Avancement du chantier</h3>
                 </div>
-                <p className="text-xs text-gray-400 mb-4">{projets[0].titre} – {projets[0].ville}</p>
+                <p className="text-xs text-gray-500 mb-4">{projets[0].titre} – {projets[0].ville}</p>
 
                 {/* Mini horizontal timeline */}
                 <div className="relative pt-1 pb-6">
@@ -312,7 +313,7 @@ export default function HomePage() {
                             {done && <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><polyline points="20 6 9 17 4 12" /></svg>}
                             {cur && <div className="w-2 h-2 bg-primary-500 rounded-full" />}
                           </div>
-                          <span className={`text-center leading-tight w-12 text-[9px] ${done || cur ? 'text-gray-700 font-semibold' : 'text-gray-400'}`}>{phase}</span>
+                          <span className={`text-center leading-tight w-12 text-[9px] ${done || cur ? 'text-gray-700 font-semibold' : 'text-gray-500'}`}>{phase}</span>
                           <span className={`text-[9px] ${done ? 'text-primary-600' : cur ? 'text-amber-600' : 'text-gray-300'}`}>{done ? 'Terminée' : cur ? 'En cours' : 'À venir'}</span>
                         </div>
                       )
@@ -372,7 +373,7 @@ export default function HomePage() {
               <div className="w-10 h-10 rounded-full bg-primary-100 flex items-center justify-center text-primary-700 font-bold">Y</div>
               <div>
                 <p className="font-bold text-gray-900 text-sm">Yassine B.</p>
-                <p className="text-xs text-gray-400">Acheteur MRE – Paris</p>
+                <p className="text-xs text-gray-500">Acheteur MRE – Paris</p>
                 <div className="flex gap-0.5 mt-0.5">
                   {[1,2,3,4,5].map((s) => (
                     <svg key={s} width="11" height="11" viewBox="0 0 24 24" fill="#155e38">

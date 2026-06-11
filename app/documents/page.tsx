@@ -69,7 +69,7 @@ export default function DocumentsPage() {
       {/* Header */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <nav className="flex items-center gap-2 text-xs text-gray-400">
+          <nav className="flex items-center gap-2 text-xs text-gray-500">
             <Link href="/" className="hover:text-primary-700 transition-colors">Accueil</Link>
             <span>/</span>
             <span className="text-gray-800 font-medium">Documents</span>
@@ -97,7 +97,7 @@ export default function DocumentsPage() {
                   </div>
                   <div className="flex items-start justify-between mb-1">
                     <h3 className="font-bold text-gray-900 text-sm">{d.titre}</h3>
-                    <span className="text-xs text-gray-400 shrink-0">{d.count} projets</span>
+                    <span className="text-xs text-gray-500 shrink-0">{d.count} projets</span>
                   </div>
                   <p className="text-xs text-gray-500 mb-4 leading-relaxed">{d.desc}</p>
                   <button className="flex items-center gap-2 text-xs font-semibold text-primary-700 hover:text-primary-600 transition-colors border border-primary-200 rounded-lg px-3 py-2 hover:bg-primary-50">
@@ -137,7 +137,7 @@ export default function DocumentsPage() {
                     />
                     <div className="flex-1 min-w-0">
                       <p className="font-semibold text-gray-900 text-sm truncate">{p.titre}</p>
-                      <p className="text-xs text-gray-400">{p.ville} · {p.documents.length} documents</p>
+                      <p className="text-xs text-gray-500">{p.ville} · {p.documents.length} documents</p>
                     </div>
                     <div className="flex items-center gap-1 text-xs text-primary-600 font-semibold shrink-0">
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -235,7 +235,7 @@ export default function DocumentsPage() {
 
                   <div>
                     <label className="block text-xs font-semibold text-gray-700 mb-1.5">
-                      Email <span className="text-gray-400 font-normal">(optionnel)</span>
+                      Email <span className="text-gray-500 font-normal">(optionnel)</span>
                     </label>
                     <input
                       type="email"

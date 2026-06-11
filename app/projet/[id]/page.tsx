@@ -28,7 +28,7 @@ export default async function ProjetPage(props: PageProps<'/projet/[id]'>) {
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <nav className="flex items-center gap-2 text-xs text-gray-400">
+          <nav className="flex items-center gap-2 text-xs text-gray-500">
             <Link href="/" className="hover:text-primary-700 transition-colors">Accueil</Link>
             <span>/</span>
             <Link href="/#projets" className="hover:text-primary-700 transition-colors">Projets</Link>
@@ -94,7 +94,7 @@ export default async function ProjetPage(props: PageProps<'/projet/[id]'>) {
             <div className="lg:col-span-3">
               <div className="flex items-start justify-between gap-4 mb-3">
                 <div>
-                  <div className="flex items-center gap-2 text-xs text-gray-400 mb-1">
+                  <div className="flex items-center gap-2 text-xs text-gray-500 mb-1">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
                     </svg>
@@ -108,10 +108,10 @@ export default async function ProjetPage(props: PageProps<'/projet/[id]'>) {
                 <div className="shrink-0 border-2 border-primary-200 bg-primary-50 rounded-2xl px-4 py-3 text-center">
                   <div className="flex items-baseline gap-1 justify-center">
                     <span className="text-3xl font-bold text-primary-700">{projet.recommandation.score}</span>
-                    <span className="text-sm text-gray-400 font-medium">/100</span>
+                    <span className="text-sm text-gray-500 font-medium">/100</span>
                   </div>
                   <div className="text-xs font-bold text-primary-700 mt-0.5">{scoreLabel(projet.recommandation.score)}</div>
-                  <div className="text-xs text-gray-400 mt-0.5">Score de confiance</div>
+                  <div className="text-xs text-gray-500 mt-0.5">Score de confiance</div>
                 </div>
               </div>
 
@@ -126,7 +126,7 @@ export default async function ProjetPage(props: PageProps<'/projet/[id]'>) {
                   { label: 'Unités vendues', value: `${venduPct}%` },
                 ].map((s) => (
                   <div key={s.label} className="bg-gray-50 rounded-xl p-3">
-                    <div className="text-xs text-gray-400 mb-0.5">{s.label}</div>
+                    <div className="text-xs text-gray-500 mb-0.5">{s.label}</div>
                     <div className="font-bold text-gray-900 text-sm">{s.value}</div>
                   </div>
                 ))}
@@ -143,7 +143,7 @@ export default async function ProjetPage(props: PageProps<'/projet/[id]'>) {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-semibold text-gray-900 text-sm">{promoteur.nom}</p>
-                    <p className="text-xs text-gray-400">{promoteur.ville} · Score: {promoteur.scoreConfiance}/100</p>
+                    <p className="text-xs text-gray-500">{promoteur.ville} · Score: {promoteur.scoreConfiance}/100</p>
                   </div>
                   <span className="text-xs font-semibold text-primary-700 bg-primary-100 px-2.5 py-1 rounded-full">
                     {scoreLabel(promoteur.scoreConfiance)}
@@ -152,7 +152,7 @@ export default async function ProjetPage(props: PageProps<'/projet/[id]'>) {
               )}
 
               {/* Date du rapport */}
-              <div className="flex items-center gap-2 text-xs text-gray-400">
+              <div className="flex items-center gap-2 text-xs text-gray-500">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="3" y="4" width="18" height="18" rx="2" ry="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
@@ -208,7 +208,7 @@ export default async function ProjetPage(props: PageProps<'/projet/[id]'>) {
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">{promoteur.nom}</p>
-                    <p className="text-xs text-gray-400">{promoteur.projetsActifs} projets actifs</p>
+                    <p className="text-xs text-gray-500">{promoteur.projetsActifs} projets actifs</p>
                   </div>
                 </div>
                 <button className="w-full text-sm font-semibold border border-primary-200 text-primary-700 py-2.5 rounded-xl hover:bg-primary-50 transition-colors flex items-center justify-center gap-2">

@@ -16,6 +16,8 @@ type Props = {
 export default function ScoreGauge({ score, size = 160, showLabel = true }: Props) {
   const clamped = Math.max(0, Math.min(100, score))
   const { label, color } = getScoreLabel(clamped)
+  // L'arc garde la couleur de charte ; le texte « Fiable » est foncé pour le contraste AA.
+  const textColor = color === '#e87722' ? '#b8560f' : color
 
   const stroke = size * 0.09
   const radius = (size - stroke) / 2
@@ -48,16 +50,16 @@ export default function ScoreGauge({ score, size = 160, showLabel = true }: Prop
           />
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="font-bold leading-none" style={{ fontSize: size * 0.3, color }}>
+          <span className="font-bold leading-none" style={{ fontSize: size * 0.3, color: textColor }}>
             {clamped}
           </span>
-          <span className="text-gray-400 text-xs mt-1">/ 100</span>
+          <span className="text-gray-500 text-xs mt-1">/ 100</span>
         </div>
       </div>
       {showLabel && (
         <span
           className="mt-3 inline-block px-3 py-1 rounded-full text-sm font-semibold"
-          style={{ color, backgroundColor: `${color}14` }}
+          style={{ color: textColor, backgroundColor: `${color}14` }}
         >
           {label}
         </span>

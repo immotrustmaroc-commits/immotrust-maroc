@@ -46,7 +46,12 @@ export default function InformationsPage() {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    submitInfoUpdate(form)
+    // Nettoie les valeurs et bloque si la raison sociale ou la description est vide.
+    const cleaned = Object.fromEntries(
+      Object.entries(form).map(([k, v]) => [k, v.trim()]),
+    ) as PromoterInfo
+    if (!cleaned.name || !cleaned.description) return
+    submitInfoUpdate(cleaned)
     setSubmitted(true)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

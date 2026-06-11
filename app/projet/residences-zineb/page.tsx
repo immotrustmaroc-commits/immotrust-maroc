@@ -47,14 +47,13 @@ export default function ResidencesZinebPage() {
   const info = published.info
   const progress = published.progress
   const venduPct = Math.round((projet.unitesVendues / projet.totalUnites) * 100)
-  const delayed = progress < 60
 
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <nav className="flex items-center gap-2 text-xs text-gray-400">
+          <nav className="flex items-center gap-2 text-xs text-gray-500">
             <Link href="/" className="hover:text-primary-700 transition-colors">Accueil</Link>
             <span>/</span>
             <Link href="/#projets" className="hover:text-primary-700 transition-colors">Projets</Link>
@@ -155,11 +154,11 @@ export default function ResidencesZinebPage() {
             <h2 className="font-bold text-gray-900 mb-4">Avancement des travaux</h2>
             <div className="flex items-end justify-between mb-1.5">
               <span className="text-sm text-gray-500">Progression globale</span>
-              <span className="text-2xl font-bold" style={{ color: delayed ? '#e87722' : '#155e38' }}>{progress}%</span>
+              <span className="text-2xl font-bold" style={{ color: '#155e38' }}>{progress}%</span>
             </div>
             <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
               <div className="h-full rounded-full transition-all duration-700 ease-out"
-                style={{ width: `${progress}%`, backgroundColor: delayed ? '#e87722' : '#155e38' }} />
+                style={{ width: `${progress}%`, backgroundColor: '#155e38' }} />
             </div>
 
             {/* Phases */}
@@ -195,9 +194,9 @@ export default function ResidencesZinebPage() {
                   <span className="absolute -left-[9px] mt-1.5 h-4 w-4 rounded-full border-2 border-white bg-primary-600" />
                   <div className="flex items-baseline justify-between gap-2">
                     <h3 className="font-semibold text-gray-800 text-sm">{u.title}</h3>
-                    <span className="text-[11px] text-gray-400 shrink-0">{formatDate(u.date)}</span>
+                    <span className="text-[11px] text-gray-500 shrink-0">{formatDate(u.date)}</span>
                   </div>
-                  <p className="text-xs text-gray-400 mt-0.5">{u.project}</p>
+                  <p className="text-xs text-gray-500 mt-0.5">{u.project}</p>
                   <p className="text-sm text-gray-600 mt-1.5 leading-relaxed">{u.description}</p>
                 </li>
               ))}
@@ -207,12 +206,12 @@ export default function ResidencesZinebPage() {
           {/* Documents (statut) */}
           <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
             <h2 className="font-bold text-gray-900 mb-1">Conformité documentaire</h2>
-            <p className="text-xs text-gray-400 mb-4">Seul le statut est publié — les documents originaux ne sont jamais accessibles publiquement.</p>
+            <p className="text-xs text-gray-500 mb-4">Seul le statut est publié — les documents originaux ne sont jamais accessibles publiquement.</p>
             <ul className="divide-y divide-gray-100">
               {projet.documents.slice(0, 4).map((d) => (
                 <li key={d.nom} className="flex items-center justify-between py-2.5">
                   <span className="text-sm text-gray-700">{d.nom}</span>
-                  <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${d.verifie ? 'bg-primary-50 text-primary-700' : 'bg-amber-50 text-[#e87722]'}`}>
+                  <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${d.verifie ? 'bg-primary-50 text-primary-700' : 'bg-amber-50 text-[#b8560f]'}`}>
                     {d.verifie ? 'Vérifié' : 'En attente'}
                   </span>
                 </li>

@@ -98,7 +98,7 @@ export default function ProjectTabs({ projet }: { projet: Projet }) {
                           <div className="w-3 h-3 bg-gray-300 rounded-full" />
                         )}
                       </div>
-                      <span className={`text-xs font-medium text-center leading-tight w-16 ${done || current ? 'text-gray-800' : 'text-gray-400'}`}>
+                      <span className={`text-xs font-medium text-center leading-tight w-16 ${done || current ? 'text-gray-800' : 'text-gray-500'}`}>
                         {phase}
                       </span>
                     </div>
@@ -117,12 +117,12 @@ export default function ProjectTabs({ projet }: { projet: Projet }) {
                   }`} />
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-xs text-gray-400 font-medium">{event.date}</span>
+                      <span className="text-xs text-gray-500 font-medium">{event.date}</span>
                       {event.statut === 'completed' && <span className="bg-primary-100 text-primary-700 text-xs px-2 py-0.5 rounded-full font-medium">Terminé</span>}
                       {event.statut === 'current' && <span className="bg-amber-100 text-amber-700 text-xs px-2 py-0.5 rounded-full font-medium">En cours</span>}
                       {event.statut === 'upcoming' && <span className="bg-gray-100 text-gray-500 text-xs px-2 py-0.5 rounded-full">À venir</span>}
                     </div>
-                    <p className={`text-sm font-semibold mt-0.5 ${event.statut === 'upcoming' ? 'text-gray-400' : 'text-gray-800'}`}>{event.titre}</p>
+                    <p className={`text-sm font-semibold mt-0.5 ${event.statut === 'upcoming' ? 'text-gray-500' : 'text-gray-800'}`}>{event.titre}</p>
                     <p className={`text-xs mt-0.5 leading-relaxed ${event.statut === 'upcoming' ? 'text-gray-300' : 'text-gray-500'}`}>{event.description}</p>
                   </div>
                 </div>
@@ -149,7 +149,7 @@ export default function ProjectTabs({ projet }: { projet: Projet }) {
                   </div>
                   <div className="p-2 bg-white">
                     <p className="text-xs font-medium text-gray-700 truncate">{photo.titre}</p>
-                    <p className="text-xs text-gray-400">{photo.date}</p>
+                    <p className="text-xs text-gray-500">{photo.date}</p>
                   </div>
                 </div>
               ))}
@@ -181,7 +181,7 @@ export default function ProjectTabs({ projet }: { projet: Projet }) {
                       </svg>
                     )}
                   </div>
-                  <p className="text-xs text-gray-400">{doc.taille} · {doc.date}</p>
+                  <p className="text-xs text-gray-500">{doc.taille} · {doc.date}</p>
                   <button className="mt-2 flex items-center gap-1 text-xs font-semibold text-primary-700 hover:text-primary-600 transition-colors">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />

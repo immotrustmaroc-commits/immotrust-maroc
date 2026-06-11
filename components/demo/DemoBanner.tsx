@@ -1,3 +1,5 @@
+'use client'
+
 /** Bandeau permanent obligatoire (REQ-14) — visible sur tout l'espace démo. */
 export default function DemoBanner() {
   return (

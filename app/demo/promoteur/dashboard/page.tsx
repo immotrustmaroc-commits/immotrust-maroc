@@ -13,13 +13,13 @@ import { useDemoStore, FLAGSHIP_PROJECT } from '@/lib/demo/demoStore'
 
 const alertStyles: Record<DemoAlert['level'], { dot: string; badge: string; label: string }> = {
   info: { dot: '#1f8f58', badge: 'bg-primary-50 text-primary-700', label: 'Info' },
-  warning: { dot: '#e87722', badge: 'bg-orange-50 text-[#e87722]', label: 'À traiter' },
+  warning: { dot: '#e87722', badge: 'bg-orange-50 text-[#b8560f]', label: 'À traiter' },
   critical: { dot: '#cc2200', badge: 'bg-red-50 text-[#cc2200]', label: 'Urgent' },
 }
 
 export default function DashboardPage() {
   const { published } = useDemoStore()
-  const maxDaily = Math.max(...demoVisitStats.daily7)
+  const maxDaily = Math.max(...demoVisitStats.daily7, 1)
 
   // L'avancement du projet phare reflète la valeur publiée (live).
   const projectProgress = (p: { title: string; progress: number }) =>
@@ -41,7 +41,7 @@ export default function DashboardPage() {
             Score de confiance publié
           </h2>
           <ScoreGauge score={demoPromoter.trustScore} />
-          <p className="text-xs text-gray-400 mt-4">
+          <p className="text-xs text-gray-500 mt-4">
             Dernier recalcul : {demoPromoter.lastRecalc}
           </p>
           {demoPromoter.isVerified && (
@@ -66,7 +66,7 @@ export default function DashboardPage() {
             <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
               Alertes &amp; recommandations
             </h2>
-            <span className="text-xs font-semibold bg-orange-50 text-[#e87722] px-2 py-0.5 rounded-full">
+            <span className="text-xs font-semibold bg-orange-50 text-[#b8560f] px-2 py-0.5 rounded-full">
               {demoAlerts.length}
             </span>
           </div>
@@ -108,7 +108,7 @@ export default function DashboardPage() {
       <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 mt-5">
         <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
           Statistiques de visite
-          <span className="ml-2 normal-case font-normal text-gray-400 text-xs">(données agrégées anonymes)</span>
+          <span className="ml-2 normal-case font-normal text-gray-500 text-xs">(données agrégées anonymes)</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -127,16 +127,16 @@ export default function DashboardPage() {
 
           {/* Mini-graphe barres 7 jours */}
           <div className="md:col-span-2 flex flex-col">
-            <span className="text-xs text-gray-400 mb-2">Vues sur 7 jours</span>
+            <span className="text-xs text-gray-500 mb-2">Vues sur 7 jours</span>
             <div className="flex-1 flex items-end gap-2 sm:gap-3 min-h-[140px]">
               {demoVisitStats.daily7.map((v, idx) => (
                 <div key={idx} className="flex-1 flex flex-col items-center justify-end gap-1.5">
-                  <div className="text-[11px] text-gray-400">{v}</div>
+                  <div className="text-[11px] text-gray-500">{v}</div>
                   <div
                     className="w-full rounded-t-md bg-primary-500/80 hover:bg-primary-600 transition-colors"
                     style={{ height: `${(v / maxDaily) * 110}px` }}
                   />
-                  <div className="text-[11px] text-gray-400">{demoVisitStats.dailyLabels[idx]}</div>
+                  <div className="text-[11px] text-gray-500">{demoVisitStats.dailyLabels[idx]}</div>
                 </div>
               ))}
             </div>
@@ -154,13 +154,13 @@ export default function DashboardPage() {
                 <h3 className="font-semibold text-gray-800 text-sm">{p.title}</h3>
                 <span
                   className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${
-                    p.status === 'Retard' ? 'bg-orange-50 text-[#e87722]' : 'bg-primary-50 text-primary-700'
+                    p.status === 'Retard' ? 'bg-orange-50 text-[#b8560f]' : 'bg-primary-50 text-primary-700'
                   }`}
                 >
                   {p.status}
                 </span>
               </div>
-              <p className="text-xs text-gray-400 mt-0.5">{p.city}</p>
+              <p className="text-xs text-gray-500 mt-0.5">{p.city}</p>
               <div className="mt-3">
                 <div className="flex justify-between text-xs text-gray-500 mb-1">
                   <span>Avancement</span>

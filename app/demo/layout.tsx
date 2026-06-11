@@ -43,7 +43,7 @@ export default function DemoLayout({ children }: { children: React.ReactNode }) 
     return (
       <div className="min-h-screen flex flex-col">
         <DemoBanner />
-        <div className="flex-1 flex items-center justify-center text-gray-400 text-sm">
+        <div className="flex-1 flex items-center justify-center text-gray-500 text-sm">
           Chargement de l’espace promoteur…
         </div>
       </div>

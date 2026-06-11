@@ -1,17 +1,18 @@
 import Link from 'next/link'
 import { promoteurs, projets } from '@/lib/data'
 
+// Barème unique aligné sur le brief (≥75 Excellent / ≥50 Fiable / Vigilance),
+// couleurs conformes WCAG AA.
 function scoreLabel(s: number) {
-  if (s >= 90) return 'Excellent'
-  if (s >= 80) return 'Très fiable'
-  if (s >= 70) return 'Fiable'
-  return 'À surveiller'
+  if (s >= 75) return 'Excellent'
+  if (s >= 50) return 'Fiable'
+  return 'Vigilance'
 }
 
 function scoreColor(s: number) {
-  if (s >= 80) return { text: 'text-primary-700', bg: 'bg-primary-50', border: 'border-primary-200', badge: 'bg-primary-100 text-primary-700' }
-  if (s >= 70) return { text: 'text-blue-700', bg: 'bg-blue-50', border: 'border-blue-200', badge: 'bg-blue-100 text-blue-700' }
-  return { text: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', badge: 'bg-amber-100 text-amber-700' }
+  if (s >= 75) return { text: 'text-primary-700', bg: 'bg-primary-50', border: 'border-primary-200', badge: 'bg-primary-100 text-primary-700' }
+  if (s >= 50) return { text: 'text-amber-700', bg: 'bg-amber-50', border: 'border-amber-200', badge: 'bg-amber-100 text-amber-700' }
+  return { text: 'text-red-700', bg: 'bg-red-50', border: 'border-red-200', badge: 'bg-red-100 text-red-700' }
 }
 
 const extraPromoteurs = [
@@ -45,7 +46,7 @@ export default function PromoteursPage() {
       {/* Header */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="py-3 text-xs text-gray-400 flex items-center gap-2">
+          <div className="py-3 text-xs text-gray-500 flex items-center gap-2">
             <Link href="/" className="hover:text-primary-700 transition-colors">Accueil</Link>
             <span>/</span>
             <span className="text-gray-800 font-medium">Promoteurs</span>
@@ -66,8 +67,8 @@ export default function PromoteursPage() {
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 mb-8">
           <div className="flex flex-wrap gap-3 items-end">
             <div className="flex-1 min-w-40">
-              <label className="block text-xs font-semibold text-gray-600 mb-1.5">Ville</label>
-              <select className="w-full text-sm px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white appearance-none">
+              <label htmlFor="filtre-ville" className="block text-xs font-semibold text-gray-600 mb-1.5">Ville</label>
+              <select id="filtre-ville" className="w-full text-sm px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white appearance-none">
                 <option>Toutes les villes</option>
                 <option>Casablanca</option>
                 <option>Rabat</option>
@@ -76,25 +77,25 @@ export default function PromoteursPage() {
               </select>
             </div>
             <div className="flex-1 min-w-40">
-              <label className="block text-xs font-semibold text-gray-600 mb-1.5">Score de confiance</label>
-              <select className="w-full text-sm px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white appearance-none">
+              <label htmlFor="filtre-score" className="block text-xs font-semibold text-gray-600 mb-1.5">Score de confiance</label>
+              <select id="filtre-score" className="w-full text-sm px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white appearance-none">
                 <option>Tous les scores</option>
-                <option>Excellent (90+)</option>
-                <option>Très fiable (80–89)</option>
-                <option>Fiable (70–79)</option>
+                <option>Excellent (75+)</option>
+                <option>Fiable (50–74)</option>
+                <option>Vigilance (&lt; 50)</option>
               </select>
             </div>
             <div className="flex-1 min-w-40">
-              <label className="block text-xs font-semibold text-gray-600 mb-1.5">Statut</label>
-              <select className="w-full text-sm px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white appearance-none">
+              <label htmlFor="filtre-statut" className="block text-xs font-semibold text-gray-600 mb-1.5">Statut</label>
+              <select id="filtre-statut" className="w-full text-sm px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white appearance-none">
                 <option>Tous les statuts</option>
                 <option>Promoteur vérifié</option>
                 <option>En cours de vérification</option>
               </select>
             </div>
             <div className="flex-1 min-w-40">
-              <label className="block text-xs font-semibold text-gray-600 mb-1.5">Nombre de projets</label>
-              <select className="w-full text-sm px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white appearance-none">
+              <label htmlFor="filtre-projets" className="block text-xs font-semibold text-gray-600 mb-1.5">Nombre de projets</label>
+              <select id="filtre-projets" className="w-full text-sm px-3 py-2.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary-400 bg-white appearance-none">
                 <option>Tous</option>
                 <option>1–5 projets</option>
                 <option>6–15 projets</option>
@@ -118,8 +119,8 @@ export default function PromoteursPage() {
             <span className="font-bold text-gray-900">{allPromoteurs.length}</span> promoteurs trouvés
           </p>
           <div className="flex items-center gap-2 text-sm">
-            <span className="text-gray-500">Trier par :</span>
-            <select className="text-sm font-medium text-gray-700 border border-gray-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-primary-400">
+            <label htmlFor="tri-promoteurs" className="text-gray-500">Trier par :</label>
+            <select id="tri-promoteurs" className="text-sm font-medium text-gray-700 border border-gray-200 rounded-lg px-3 py-1.5 bg-white focus:outline-none focus:ring-2 focus:ring-primary-400">
               <option>Score de confiance</option>
               <option>Nombre de projets</option>
               <option>Nom</option>
@@ -146,7 +147,7 @@ export default function PromoteursPage() {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 text-sm leading-tight">{p.nom}</h3>
-                      <p className="text-xs text-gray-400">{p.ville} · {p.anneeCreation}</p>
+                      <p className="text-xs text-gray-500">{p.ville} · {p.anneeCreation}</p>
                     </div>
                   </div>
                   <span className={`text-xs font-bold px-2.5 py-1 rounded-full ${sc.badge}`}>
@@ -159,7 +160,7 @@ export default function PromoteursPage() {
                   <div className={`text-2xl font-bold leading-none ${sc.text}`}>{p.scoreConfiance}</div>
                   <div>
                     <div className={`text-xs font-semibold ${sc.text}`}>/100 · {scoreLabel(p.scoreConfiance)}</div>
-                    <div className="text-xs text-gray-400">Score de confiance</div>
+                    <div className="text-xs text-gray-500">Score de confiance</div>
                   </div>
                 </div>
 

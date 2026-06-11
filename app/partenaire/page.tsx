@@ -65,7 +65,7 @@ export default function PartenairePage() {
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="py-3 text-xs text-gray-400 flex items-center gap-2">
+          <div className="py-3 text-xs text-gray-500 flex items-center gap-2">
             <Link href="/" className="hover:text-primary-700 transition-colors">Accueil</Link>
             <span>/</span>
             <span className="text-gray-800 font-medium">Devenir partenaire</span>
@@ -122,7 +122,7 @@ export default function PartenairePage() {
             <>
               <div className="mb-6">
                 <h2 className="text-lg font-bold text-gray-900">Formulaire de candidature</h2>
-                <p className="text-sm text-gray-400 mt-0.5">Tous les champs sont obligatoires.</p>
+                <p className="text-sm text-gray-500 mt-0.5">Tous les champs sont obligatoires.</p>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -209,7 +209,7 @@ export default function PartenairePage() {
                     </svg>
                     Envoyer ma candidature
                   </button>
-                  <p className="text-xs text-gray-400 flex items-center gap-1.5">
+                  <p className="text-xs text-gray-500 flex items-center gap-1.5">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <circle cx="12" cy="12" r="10" />
                       <polyline points="12 6 12 12 16 14" />

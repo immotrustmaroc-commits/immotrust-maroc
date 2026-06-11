@@ -22,7 +22,7 @@ function Toggle({
     <label className="flex items-start justify-between gap-3 py-3 cursor-pointer select-none">
       <span className="min-w-0">
         <span className="block text-sm font-medium text-gray-800">{label}</span>
-        {hint && <span className="block text-xs text-gray-400 mt-0.5">{hint}</span>}
+        {hint && <span className="block text-xs text-gray-500 mt-0.5">{hint}</span>}
       </span>
       <button
         type="button"
@@ -52,6 +52,8 @@ export default function SimulationPage() {
   // Recalcul instantané à CHAQUE changement — aucun debounce (REQ-13).
   const result = useMemo(() => calculateSimulatedScore(inputs), [inputs])
   const { color } = getScoreLabel(result.score)
+  // Texte foncé pour le score « Fiable » (contraste AA) ; l'orange reste pour les surfaces.
+  const scoreTextColor = color === '#e87722' ? '#b8560f' : color
 
   function set<K extends keyof ScoreInputs>(key: K, value: ScoreInputs[K]) {
     setInputs((prev) => ({ ...prev, [key]: value }))
@@ -84,7 +86,7 @@ export default function SimulationPage() {
           {/* Documents */}
           <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
             <h2 className="text-sm font-semibold text-gray-800 mb-1">Documents vérifiés</h2>
-            <p className="text-xs text-gray-400 mb-2">Permis +30 · Titre +30 · Plans +20 · GFA +20</p>
+            <p className="text-xs text-gray-500 mb-2">Permis +30 · Titre +30 · Plans +20 · GFA +20</p>
             <div className="divide-y divide-gray-100">
               <Toggle label="Permis de construire vérifié" checked={inputs.has_permis} onChange={(v) => set('has_permis', v)} />
               <Toggle label="Titre foncier vérifié" checked={inputs.has_titre} onChange={(v) => set('has_titre', v)} />
@@ -96,7 +98,7 @@ export default function SimulationPage() {
           {/* Chantier */}
           <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
             <h2 className="text-sm font-semibold text-gray-800 mb-1">Avancement chantier</h2>
-            <p className="text-xs text-gray-400 mb-3">À l’heure : 100 · retard &gt; 0 : 60 · &gt; 6 mois : 20 · arrêté : 0</p>
+            <p className="text-xs text-gray-500 mb-3">À l’heure : 100 · retard &gt; 0 : 60 · &gt; 6 mois : 20 · arrêté : 0</p>
 
             <label htmlFor="delay" className="flex items-center justify-between text-sm text-gray-700">
               <span className="font-medium">Retard estimé</span>
@@ -113,7 +115,7 @@ export default function SimulationPage() {
               disabled={inputs.is_halted}
               className="w-full mt-2 accent-primary-600 disabled:opacity-40"
             />
-            <div className="flex justify-between text-[11px] text-gray-400 mt-0.5">
+            <div className="flex justify-between text-[11px] text-gray-500 mt-0.5">
               <span>0</span><span>6</span><span>12 mois</span>
             </div>
 
@@ -130,7 +132,7 @@ export default function SimulationPage() {
           {/* Transparence */}
           <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
             <h2 className="text-sm font-semibold text-gray-800 mb-1">Transparence</h2>
-            <p className="text-xs text-gray-400 mb-2">Aucun litige +50 · accès inspecteur (complet +30 / partiel +15) · ICE +20</p>
+            <p className="text-xs text-gray-500 mb-2">Aucun litige +50 · accès inspecteur (complet +30 / partiel +15) · ICE +20</p>
             <div className="divide-y divide-gray-100">
               <Toggle label="Aucun litige en cours" checked={inputs.no_dispute} onChange={(v) => set('no_dispute', v)} />
               <Toggle label="Numéro ICE publié" checked={inputs.ice_published} onChange={(v) => set('ice_published', v)} />
@@ -157,7 +159,7 @@ export default function SimulationPage() {
                       }`}
                     >
                       <span className="block text-sm font-semibold">{opt.label}</span>
-                      <span className="block text-[11px] text-gray-400">{opt.pts}</span>
+                      <span className="block text-[11px] text-gray-500">{opt.pts}</span>
                     </button>
                   )
                 })}
@@ -168,7 +170,7 @@ export default function SimulationPage() {
           {/* Avis */}
           <section className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5">
             <h2 className="text-sm font-semibold text-gray-800 mb-1">Avis acheteurs</h2>
-            <p className="text-xs text-gray-400 mb-3">
+            <p className="text-xs text-gray-500 mb-3">
               Note moyenne × 20 = coefficient. À 0, la formule temporaire (sans avis) s’applique.
             </p>
             <label htmlFor="rating" className="flex items-center justify-between text-sm text-gray-700">
@@ -187,7 +189,7 @@ export default function SimulationPage() {
               onChange={(e) => set('avg_rating', Number(e.target.value))}
               className="w-full mt-2 accent-primary-600"
             />
-            <div className="flex justify-between text-[11px] text-gray-400 mt-0.5">
+            <div className="flex justify-between text-[11px] text-gray-500 mt-0.5">
               <span>0</span><span>2.5</span><span>5 ★</span>
             </div>
           </section>
@@ -220,7 +222,7 @@ export default function SimulationPage() {
                         <span className="text-gray-600">{row.label}</span>
                         <span className="font-mono text-gray-800">
                           {isAvisInactive ? (
-                            <span className="text-xs text-gray-400">non pris en compte</span>
+                            <span className="text-xs text-gray-500">non pris en compte</span>
                           ) : (
                             <>
                               {row.value} × {row.weight} ={' '}
@@ -234,11 +236,11 @@ export default function SimulationPage() {
                 </ul>
                 <div className="border-t border-gray-100 mt-3 pt-2 flex items-center justify-between">
                   <span className="text-sm font-semibold text-gray-700">Score total</span>
-                  <span className="text-lg font-bold" style={{ color }}>
+                  <span className="text-lg font-bold" style={{ color: scoreTextColor }}>
                     {result.score}/100
                   </span>
                 </div>
-                <p className="text-[11px] text-gray-400 mt-2">
+                <p className="text-[11px] text-gray-500 mt-2">
                   {result.hasReviews
                     ? 'Formule complète (avec avis) appliquée.'
                     : 'Formule temporaire (sans avis) appliquée.'}

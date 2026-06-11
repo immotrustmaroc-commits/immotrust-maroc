@@ -87,7 +87,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-white/10 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-white/50">
-          <p>© 2024 ImmoTrust Maroc. Tous droits réservés.</p>
+          <p>© {new Date().getFullYear()} ImmoTrust Maroc. Tous droits réservés.</p>
           <div className="flex gap-4">
             <a href="#" className="hover:text-white transition-colors">Politique de confidentialité</a>
             <a href="#" className="hover:text-white transition-colors">Conditions d&apos;utilisation</a>

@@ -72,7 +72,7 @@ export default function DemoLoginPage() {
           {/* Séparateur */}
           <div className="flex items-center gap-3 my-5">
             <span className="h-px flex-1 bg-gray-200" />
-            <span className="text-xs text-gray-400">ou connexion manuelle</span>
+            <span className="text-xs text-gray-500">ou connexion manuelle</span>
             <span className="h-px flex-1 bg-gray-200" />
           </div>
 
