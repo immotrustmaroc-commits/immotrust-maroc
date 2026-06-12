@@ -40,7 +40,7 @@ export default function DashboardPage() {
           <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4 self-start">
             Score de confiance publié
           </h2>
-          <ScoreGauge score={demoPromoter.trustScore} />
+          <ScoreGauge score={published.score} />
           <p className="text-xs text-gray-500 mt-4">
             Dernier recalcul : {demoPromoter.lastRecalc}
           </p>

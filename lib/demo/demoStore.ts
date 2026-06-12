@@ -36,6 +36,7 @@ export type DemoPublished = {
   info: PromoterInfo
   progress: number // avancement % du projet phare publié sur le front
   chantier: PublishedChantier[]
+  score: number // score de confiance publié (validé par ImmoTrust)
 }
 
 export type Submission =
@@ -47,6 +48,7 @@ export type Submission =
       entry: PublishedChantier
       progress: number | null
     }
+  | { id: string; type: 'SCORE_UPDATE'; createdAt: number; score: number }
 
 export type DemoState = {
   published: DemoPublished
@@ -56,6 +58,7 @@ export type DemoState = {
 /** Projet phare présenté sur la fiche publique live. */
 export const FLAGSHIP_PROJECT = 'Les Jardins de Zineb'
 export const FLAGSHIP_DEFAULT_PROGRESS = 62
+export const DEFAULT_PUBLISHED_SCORE = 78
 
 function makeDefault(): DemoState {
   return {
@@ -73,6 +76,7 @@ function makeDefault(): DemoState {
       chantier: demoChantierFeed
         .filter((u) => u.status === 'published')
         .map(({ id, date, title, description, project }) => ({ id, date, title, description, project })),
+      score: DEFAULT_PUBLISHED_SCORE,
     },
     pending: [],
   }
@@ -183,6 +187,12 @@ export function submitConstructionUpdate(
   write({ ...state, pending: [submission, ...state.pending] })
 }
 
+export function submitScoreUpdate(score: number) {
+  const state = getSnapshot()
+  const submission: Submission = { id: uid('sub'), type: 'SCORE_UPDATE', createdAt: Date.now(), score }
+  write({ ...state, pending: [submission, ...state.pending] })
+}
+
 export function approveSubmission(id: string) {
   const state = getSnapshot()
   const sub = state.pending.find((s) => s.id === id)
@@ -191,6 +201,8 @@ export function approveSubmission(id: string) {
   const published = { ...state.published }
   if (sub.type === 'INFO_UPDATE') {
     published.info = sub.info
+  } else if (sub.type === 'SCORE_UPDATE') {
+    published.score = sub.score
   } else {
     published.chantier = [sub.entry, ...state.published.chantier]
     if (sub.progress !== null) published.progress = sub.progress

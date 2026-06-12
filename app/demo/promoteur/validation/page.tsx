@@ -8,6 +8,12 @@ import {
   resetDemo,
   type Submission,
 } from '@/lib/demo/demoStore'
+import { getScoreLabel } from '@/lib/demo/score'
+
+const subTypeLabel = (t: Submission['type']) =>
+  t === 'INFO_UPDATE' ? 'Mise à jour — Informations société'
+  : t === 'SCORE_UPDATE' ? 'Mise à jour — Score de confiance'
+  : 'Mise à jour — Chantier'
 
 function formatDate(iso: string) {
   const d = new Date(iso + 'T00:00:00')
@@ -19,7 +25,7 @@ function SubmissionCard({ sub }: { sub: Submission }) {
     <li className="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
       <div className="flex items-center justify-between px-4 py-2.5 bg-amber-50 border-b border-amber-100">
         <span className="text-xs font-semibold uppercase tracking-wider text-[#b8560f]">
-          {sub.type === 'INFO_UPDATE' ? 'Mise à jour — Informations société' : 'Mise à jour — Chantier'}
+          {subTypeLabel(sub.type)}
         </span>
         <span className="text-[11px] text-gray-500">
           Soumis {new Date(sub.createdAt).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
@@ -27,7 +33,16 @@ function SubmissionCard({ sub }: { sub: Submission }) {
       </div>
 
       <div className="px-4 py-3.5">
-        {sub.type === 'INFO_UPDATE' ? (
+        {sub.type === 'SCORE_UPDATE' ? (
+          <div className="flex items-center gap-3 text-sm">
+            <span className="text-gray-600">Nouveau score de confiance proposé :</span>
+            <span className="inline-flex items-center gap-2">
+              <span className="text-2xl font-bold" style={{ color: getScoreLabel(sub.score).color === '#e87722' ? '#b8560f' : getScoreLabel(sub.score).color }}>{sub.score}</span>
+              <span className="text-xs text-gray-400">/ 100</span>
+              <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{ color: getScoreLabel(sub.score).color === '#e87722' ? '#b8560f' : getScoreLabel(sub.score).color, backgroundColor: `${getScoreLabel(sub.score).color}14` }}>{getScoreLabel(sub.score).label}</span>
+            </span>
+          </div>
+        ) : sub.type === 'INFO_UPDATE' ? (
           <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-1.5 text-sm">
             <div><dt className="text-gray-500 text-xs">Raison sociale</dt><dd className="text-gray-800">{sub.info.name}</dd></div>
             <div><dt className="text-gray-500 text-xs">Ville</dt><dd className="text-gray-800">{sub.info.city}</dd></div>

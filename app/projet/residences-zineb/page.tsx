@@ -27,8 +27,6 @@ function formatDate(iso: string) {
   return d.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
-const SCORE = 78
-
 const phaseDefs = [
   { label: 'Fondations', done: 15, current: 0 },
   { label: 'Gros œuvre', done: 70, current: 15 },
@@ -46,6 +44,8 @@ export default function ResidencesZinebPage() {
   const { published } = useDemoStore()
   const info = published.info
   const progress = published.progress
+  const score = published.score
+  const scoreLabelColor = scoreColor(score) === '#e87722' ? '#b8560f' : scoreColor(score)
   const venduPct = Math.round((projet.unitesVendues / projet.totalUnites) * 100)
 
   return (
@@ -101,12 +101,12 @@ export default function ResidencesZinebPage() {
                 </div>
                 {/* Score */}
                 <div className="shrink-0 text-center">
-                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-xl font-bold"
-                    style={{ backgroundColor: scoreColor(SCORE) }}>
-                    {SCORE}
+                  <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-xl font-bold transition-colors duration-500"
+                    style={{ backgroundColor: scoreColor(score) }}>
+                    {score}
                   </div>
-                  <div className="text-[11px] font-semibold mt-1" style={{ color: scoreColor(SCORE) }}>
-                    {scoreLabel(SCORE)}
+                  <div className="text-[11px] font-semibold mt-1 transition-colors duration-500" style={{ color: scoreLabelColor }}>
+                    {scoreLabel(score)}
                   </div>
                 </div>
               </div>

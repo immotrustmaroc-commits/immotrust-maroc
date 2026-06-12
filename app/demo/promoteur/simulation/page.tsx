@@ -1,9 +1,11 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import Link from 'next/link'
 import ScoreGauge from '@/components/demo/ScoreGauge'
 import { calculateSimulatedScore, getScoreLabel, type ScoreInputs, type InspectorAccess } from '@/lib/demo/score'
 import { demoScoreDefaults } from '@/lib/demo/demoData'
+import { useDemoStore, submitScoreUpdate } from '@/lib/demo/demoStore'
 
 /* ── Petits composants de contrôle ──────────────────────────── */
 
@@ -54,6 +56,16 @@ export default function SimulationPage() {
   const { color } = getScoreLabel(result.score)
   // Texte foncé pour le score « Fiable » (contraste AA) ; l'orange reste pour les surfaces.
   const scoreTextColor = color === '#e87722' ? '#b8560f' : color
+
+  const { published, pending } = useDemoStore()
+  const [scoreToast, setScoreToast] = useState(false)
+  const pendingScore = pending.some((s) => s.type === 'SCORE_UPDATE')
+
+  function submitScore() {
+    submitScoreUpdate(result.score)
+    setScoreToast(true)
+    setTimeout(() => setScoreToast(false), 4000)
+  }
 
   function set<K extends keyof ScoreInputs>(key: K, value: ScoreInputs[K]) {
     setInputs((prev) => ({ ...prev, [key]: value }))
@@ -254,6 +266,30 @@ export default function SimulationPage() {
                   ImmoTrust après vérification des pièces.
                 </p>
               </div>
+
+              {/* Soumettre le score à la vérification ImmoTrust */}
+              <div className="mt-4 text-left">
+                <div className="flex items-center justify-between text-xs text-gray-500 mb-2">
+                  <span>Score publié actuel</span>
+                  <span className="font-semibold text-gray-700">{published.score} / 100</span>
+                </div>
+                <button
+                  onClick={submitScore}
+                  className="w-full bg-primary-700 hover:bg-primary-600 text-white text-sm font-semibold py-2.5 rounded-lg transition-colors"
+                >
+                  Soumettre ce score à ImmoTrust
+                </button>
+                {pendingScore ? (
+                  <p className="text-[11px] text-amber-700 mt-2 text-center">
+                    Score en attente de validation —{' '}
+                    <Link href="/demo/promoteur/validation" className="font-semibold underline">file ImmoTrust</Link>
+                  </p>
+                ) : (
+                  <p className="text-[11px] text-gray-400 mt-2 text-center">
+                    Après vérification par ImmoTrust, ce score remplacera le score publié sur votre fiche.
+                  </p>
+                )}
+              </div>
             </section>
 
             {/* Recommandations */}
@@ -284,6 +320,13 @@ export default function SimulationPage() {
           </div>
         </div>
       </div>
+
+      {scoreToast && (
+        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 bg-primary-800 text-white text-sm font-medium px-4 py-3 rounded-xl shadow-lg flex items-center gap-2">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M20 6L9 17l-5-5" /></svg>
+          Score soumis — en attente de validation ImmoTrust.
+        </div>
+      )}
     </div>
   )
 }
