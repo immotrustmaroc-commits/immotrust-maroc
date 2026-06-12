@@ -24,7 +24,7 @@ function formatPrice(prix: number) {
 }
 
 function ProgressBar({ value }: { value: number }) {
-  const color = value >= 75 ? '#155e38' : value >= 50 ? '#1d4ed8' : value >= 25 ? '#d97706' : '#dc2626'
+  const color = value >= 75 ? '#155e38' : value >= 50 ? '#1f8f58' : value >= 25 ? '#e87722' : '#cc2200'
   return (
     <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
       <div className="h-full rounded-full" style={{ width: `${value}%`, backgroundColor: color }} />

@@ -79,9 +79,9 @@ export default function SearchBar() {
             </svg>
             <select value={score} onChange={(e) => setScore(e.target.value)} className={fieldClass}>
               <option value="">Tous les scores</option>
-              <option value="90">Excellent (90+)</option>
-              <option value="80">Très fiable (80+)</option>
-              <option value="70">Fiable (70+)</option>
+              <option value="75">Excellent (75+)</option>
+              <option value="50">Fiable (50+)</option>
+              <option value="0">Vigilance</option>
             </select>
           </div>
         </div>

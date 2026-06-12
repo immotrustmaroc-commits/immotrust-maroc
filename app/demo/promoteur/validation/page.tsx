@@ -38,7 +38,7 @@ function SubmissionCard({ sub }: { sub: Submission }) {
             <span className="text-gray-600">Nouveau score de confiance proposé :</span>
             <span className="inline-flex items-center gap-2">
               <span className="text-2xl font-bold" style={{ color: getScoreLabel(sub.score).color === '#e87722' ? '#b8560f' : getScoreLabel(sub.score).color }}>{sub.score}</span>
-              <span className="text-xs text-gray-400">/ 100</span>
+              <span className="text-xs text-gray-500">/ 100</span>
               <span className="text-xs font-semibold px-2 py-0.5 rounded-full" style={{ color: getScoreLabel(sub.score).color === '#e87722' ? '#b8560f' : getScoreLabel(sub.score).color, backgroundColor: `${getScoreLabel(sub.score).color}14` }}>{getScoreLabel(sub.score).label}</span>
             </span>
           </div>

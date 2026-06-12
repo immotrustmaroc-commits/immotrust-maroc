@@ -44,7 +44,7 @@ export default function ResidencesZinebPage() {
   const { published } = useDemoStore()
   const info = published.info
   const progress = published.progress
-  const score = published.score
+  const score = Math.max(0, Math.min(100, published.score))
   const scoreLabelColor = scoreColor(score) === '#e87722' ? '#b8560f' : scoreColor(score)
   const venduPct = Math.round((projet.unitesVendues / projet.totalUnites) * 100)
 
@@ -102,7 +102,7 @@ export default function ResidencesZinebPage() {
                 {/* Score */}
                 <div className="shrink-0 text-center">
                   <div className="w-16 h-16 rounded-2xl flex items-center justify-center text-white text-xl font-bold transition-colors duration-500"
-                    style={{ backgroundColor: scoreColor(score) }}>
+                    style={{ backgroundColor: scoreLabelColor }}>
                     {score}
                   </div>
                   <div className="text-[11px] font-semibold mt-1 transition-colors duration-500" style={{ color: scoreLabelColor }}>

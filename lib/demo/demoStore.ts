@@ -189,7 +189,8 @@ export function submitConstructionUpdate(
 
 export function submitScoreUpdate(score: number) {
   const state = getSnapshot()
-  const submission: Submission = { id: uid('sub'), type: 'SCORE_UPDATE', createdAt: Date.now(), score }
+  const safe = Math.max(0, Math.min(100, Math.round(score)))
+  const submission: Submission = { id: uid('sub'), type: 'SCORE_UPDATE', createdAt: Date.now(), score: safe }
   write({ ...state, pending: [submission, ...state.pending] })
 }
 

@@ -224,7 +224,7 @@ export default function ProjectTabs({ projet }: { projet: Projet }) {
 
           <div className={`rounded-2xl p-6 ${
             projet.recommandation.niveau === 'Excellent' ? 'bg-primary-700' :
-            projet.recommandation.niveau === 'Bon' ? 'bg-blue-700' :
+            projet.recommandation.niveau === 'Bon' ? 'bg-primary-600' :
             projet.recommandation.niveau === 'Acceptable' ? 'bg-amber-600' : 'bg-red-700'
           } text-white`}>
             <div className="flex items-center justify-between mb-3">

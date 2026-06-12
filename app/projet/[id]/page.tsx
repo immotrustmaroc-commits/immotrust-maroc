@@ -3,11 +3,11 @@ import Link from 'next/link'
 import { getProjet, getPromoteur } from '@/lib/data'
 import ProjectTabs from '@/components/ProjectTabs'
 
+// Barème unifié (brief) : ≥75 Excellent / ≥50 Fiable / Vigilance.
 function scoreLabel(s: number) {
-  if (s >= 90) return 'Excellent'
-  if (s >= 80) return 'Très fiable'
-  if (s >= 70) return 'Fiable'
-  return 'À surveiller'
+  if (s >= 75) return 'Excellent'
+  if (s >= 50) return 'Fiable'
+  return 'Vigilance'
 }
 
 function formatPrice(prix: number) {

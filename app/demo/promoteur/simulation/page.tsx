@@ -275,17 +275,18 @@ export default function SimulationPage() {
                 </div>
                 <button
                   onClick={submitScore}
-                  className="w-full bg-primary-700 hover:bg-primary-600 text-white text-sm font-semibold py-2.5 rounded-lg transition-colors"
+                  disabled={pendingScore}
+                  className="w-full bg-primary-700 hover:bg-primary-600 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-semibold py-2.5 rounded-lg transition-colors"
                 >
                   Soumettre ce score à ImmoTrust
                 </button>
                 {pendingScore ? (
                   <p className="text-[11px] text-amber-700 mt-2 text-center">
-                    Score en attente de validation —{' '}
+                    Score déjà en attente de validation —{' '}
                     <Link href="/demo/promoteur/validation" className="font-semibold underline">file ImmoTrust</Link>
                   </p>
                 ) : (
-                  <p className="text-[11px] text-gray-400 mt-2 text-center">
+                  <p className="text-[11px] text-gray-500 mt-2 text-center">
                     Après vérification par ImmoTrust, ce score remplacera le score publié sur votre fiche.
                   </p>
                 )}
